@@ -8,7 +8,9 @@
  * Tested on Input size : 2E6 = (2 * 10^6)
  *
  * Observations :-
- *    On a 
+ *    On an array *(arr + i) is faster than arr[i]
+ *    This is true even for pointers (dynamic memory).
+ *
  */
 
 #include <stdio.h>
@@ -106,10 +108,8 @@ int main (void)
       end_time   = ((end[i].tv_sec) * 1000 + end[i].tv_usec/1000.0);
       diff = end_time - start_time;
 
-//      printf ("Total time for %d : %g\n", i + 1, diff);
-
-      /* Print the AVERAGE time taken for each operation (READ + WRITE) */
-      printf ("%g\t", diff / 4.0);
+      /* Print the total time taken for each operation (READ + WRITE) */
+      printf ("%g\t", diff);
    }
    printf ("\n");
 
