@@ -8,7 +8,7 @@
  * 
  * Arrays and vectors of only 'int' is created and tested. It is assumed that
  * it shouldn't make much difference in judging the performance in general.
- * Also, both vector and array are compared for sequential access and not
+ * Also, both vector and array are compared for sequential access as well as
  * random access.
  *
  * OBSERVATIONS :-
@@ -27,14 +27,14 @@
  *
  * Times taken for ARR_SIZE = 1m (1000000) on Linux i686 (64bit Machine) 7.7GB RAM:-
  *
- *  Time taken to write to array. : 21.1658 ms
- *  Time taken to read from array. : 2.84009 ms
- *  Time taken to write to dynamic array. : 14.967 ms
- *  Time taken to read from dynamic array. : 3.09204 ms
- *  Time taken to write to vector using indices. : 13.8569 ms
- *  Time taken to read from vector using indices. : 4.94507 ms
- *  Time taken to write to vector using iterators. : 32.8459 ms
- *  Time taken to read from vector using iterators. : 20.8821 ms
+ *  Time taken to write to array. : 12.0591 ms
+ *  Time taken to read from array. : 2.68799 ms
+ *  Time taken to write to dynamic array. : 12.554 ms
+ *  Time taken to read from dynamic array. : 2.82788 ms
+ *  Time taken to write to vector using indices. : 12.783 ms
+ *  Time taken to read from vector using indices. : 4.39111 ms
+ *  Time taken to write to vector using iterators. : 24.9099 ms
+ *  Time taken to read from vector using iterators. : 19.1431 ms
  */
  
 #include <vector>
@@ -84,7 +84,17 @@ int main (void)
     tmp = arr[i];
   }
   gettimeofday (&stop, NULL);
-  printtime (start, stop, string ("Time taken to read from array."));
+  printtime (start, stop, string ("Time taken to read from array sequentially."));
+
+  /* Reading data from array randomly*/
+  gettimeofday (&start, NULL);
+  for (int i = 0; i < ARR_SIZE; i++)
+  {
+    tmp = arr[rand() % ARR_SIZE];
+  }
+  gettimeofday (&stop, NULL);
+  printtime (start, stop, string ("Time taken to read from array randomly."));
+
 
   int *darr = (int *) calloc (sizeof (int), ARR_SIZE);  
 
@@ -104,10 +114,19 @@ int main (void)
     tmp = darr[i];
   }
   gettimeofday (&stop, NULL);
-  printtime (start, stop, string ("Time taken to read from dynamic array."));
+  printtime (start, stop, string ("Time taken to read from dynamic array sequentially."));
 
+  /* Reading data from dynamic array randomly*/
+  gettimeofday (&start, NULL);
+  for (int i = 0; i < ARR_SIZE; i++)
+  {
+    tmp = darr[rand() % ARR_SIZE];
+  }
+  gettimeofday (&stop, NULL);
+  printtime (start, stop, string ("Time taken to read from dynamic array randomly."));
 
   std::vector<int> v(ARR_SIZE);
+  assert (v.capacity() == ARR_SIZE);
   
   /* Writing to vector using indices*/
   gettimeofday (&start, NULL);
@@ -126,7 +145,16 @@ int main (void)
     tmp = v[i];
   }
   gettimeofday (&stop, NULL);
-  printtime (start, stop, string ("Time taken to read from vector using indices."));
+  printtime (start, stop, string ("Time taken to read from vector using indices, sequentially."));
+ 
+  /* Reading data from dynamic array randomly*/
+  gettimeofday (&start, NULL);
+  for (int i = 0; i < ARR_SIZE; i++)
+  {
+    tmp = v[rand() % ARR_SIZE];
+  }
+  gettimeofday (&stop, NULL);
+  printtime (start, stop, string ("Time taken to read from vector using indices, randomly."));
 
   std::vector<int> v2(ARR_SIZE);
   
