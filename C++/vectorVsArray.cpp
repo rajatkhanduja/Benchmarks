@@ -15,7 +15,7 @@
  *  - It is faster to read from arrays than from vectors.
  *  - Reading/writing using iterators in vectors is far slower than using indices.
  *
- * Times taken for ARR_SIZE = 1m (1000000) :-
+ * Times taken for ARR_SIZE = 1m (1000000) on Linux i386 (32bit Machine) 3GB RAM:-
  *
  *  Time taken to write to array. : 33.273 ms
  *  Time taken to read from array. : 3.855 ms
@@ -23,6 +23,15 @@
  *  Time taken to read from vector using indices. : 5.633 ms
  *  Time taken to write to vector using iterators. : 43.448 ms
  *  Time taken to read from vector using iterators. : 21.938 ms
+ *
+ * Times taken for ARR_SIZE = 1m (1000000) on Linux i686 (64bit Machine) 7.7GB RAM:-
+ *
+ *  Time taken to write to array. : 22.9548 ms
+ *  Time taken to read from array. : 2.48413 ms
+ *  Time taken to write to vector using indices. : 11.8062 ms
+ *  Time taken to read from vector using indices. : 4.22803 ms
+ *  Time taken to write to vector using iterators. : 23.6848 ms
+ *  Time taken to read from vector using iterators. : 17.6719 ms
  */
  
 #include <vector>
