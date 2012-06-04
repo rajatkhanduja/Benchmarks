@@ -1,6 +1,7 @@
 /* Program to compare the performance difference between an array and a 
  * vector. To make the competition fair, the vector is initialized as the 
- * same size as the array and the size is never changed.
+ * same size as the array and the size is never changed. Also, the comparison
+ * is made between an array initialized at runtime, dynamically.
  *
  * The idea is to compare access times for array and vectors, using both 
  * indices and iterators for vectors.
@@ -26,12 +27,14 @@
  *
  * Times taken for ARR_SIZE = 1m (1000000) on Linux i686 (64bit Machine) 7.7GB RAM:-
  *
- *  Time taken to write to array. : 22.9548 ms
- *  Time taken to read from array. : 2.48413 ms
- *  Time taken to write to vector using indices. : 11.8062 ms
- *  Time taken to read from vector using indices. : 4.22803 ms
- *  Time taken to write to vector using iterators. : 23.6848 ms
- *  Time taken to read from vector using iterators. : 17.6719 ms
+ *  Time taken to write to array. : 21.1658 ms
+ *  Time taken to read from array. : 2.84009 ms
+ *  Time taken to write to dynamic array. : 14.967 ms
+ *  Time taken to read from dynamic array. : 3.09204 ms
+ *  Time taken to write to vector using indices. : 13.8569 ms
+ *  Time taken to read from vector using indices. : 4.94507 ms
+ *  Time taken to write to vector using iterators. : 32.8459 ms
+ *  Time taken to read from vector using iterators. : 20.8821 ms
  */
  
 #include <vector>
@@ -39,6 +42,7 @@
 #include <cstdlib>
 #include <ctime>
 #include <sys/time.h>
+#include <cassert>
 
 #define ARR_SIZE 1000000
 
@@ -82,6 +86,27 @@ int main (void)
   gettimeofday (&stop, NULL);
   printtime (start, stop, string ("Time taken to read from array."));
 
+  int *darr = (int *) calloc (sizeof (int), ARR_SIZE);  
+
+  /* Writing data to array */
+  gettimeofday (&start, NULL);
+  for (int i = 0; i < ARR_SIZE; i++)
+  {
+    darr[i] = rand();
+  }
+  gettimeofday (&stop, NULL);
+  printtime (start, stop, string ("Time taken to write to dynamic array."));
+
+  /* Reading data from array */
+  gettimeofday (&start, NULL);
+  for (int i = 0; i < ARR_SIZE; i++)
+  {
+    tmp = darr[i];
+  }
+  gettimeofday (&stop, NULL);
+  printtime (start, stop, string ("Time taken to read from dynamic array."));
+
+
   std::vector<int> v(ARR_SIZE);
   
   /* Writing to vector using indices*/
@@ -92,6 +117,7 @@ int main (void)
   }
   gettimeofday (&stop, NULL);
   printtime (start, stop, string ("Time taken to write to vector using indices."));
+  assert (v.capacity() == ARR_SIZE);
 
   /* Reading from vector using indices*/
   gettimeofday (&start, NULL);
