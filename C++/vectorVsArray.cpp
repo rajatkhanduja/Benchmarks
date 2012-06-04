@@ -27,14 +27,17 @@
  *
  * Times taken for ARR_SIZE = 1m (1000000) on Linux i686 (64bit Machine) 7.7GB RAM:-
  *
- *  Time taken to write to array. : 12.0591 ms
- *  Time taken to read from array. : 2.68799 ms
- *  Time taken to write to dynamic array. : 12.554 ms
- *  Time taken to read from dynamic array. : 2.82788 ms
- *  Time taken to write to vector using indices. : 12.783 ms
- *  Time taken to read from vector using indices. : 4.39111 ms
- *  Time taken to write to vector using iterators. : 24.9099 ms
- *  Time taken to read from vector using iterators. : 19.1431 ms
+ *  Time taken to write to array. : 12.0378 ms
+ *  Time taken to read from array sequentially. : 2.48413 ms
+ *  Time taken to read from array randomly. : 37.3931 ms
+ *  Time taken to write to dynamic array. : 11.7458 ms
+ *  Time taken to read from dynamic array sequentially. : 2.85107 ms
+ *  Time taken to read from dynamic array randomly. : 36.0579 ms
+ *  Time taken to write to vector using indices. : 11.3909 ms
+ *  Time taken to read from vector using indices, sequentially. : 4.09106 ms
+ *  Time taken to read from vector using indices, randomly. : 39 ms
+ *  Time taken to write to vector using iterators. : 24.9949 ms
+ *  Time taken to read from vector using iterators. : 18.8049 ms 
  */
  
 #include <vector>
