@@ -7,7 +7,7 @@
  *
  * Tested on Input size : 2E6 = (2 * 10^6)
  *
- * Observations :-
+ * Observations (on Linux 2.6.38 on i686 system. 4GB RAM, intel core 2 duo):-
  *    On an array *(arr + i) is faster than arr[i]
  *    This is true even for pointers (dynamic memory).
  *
